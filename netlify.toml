@@ -1,0 +1,18 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[[redirects]]
+  from = "/api/check-status/*"
+  to = "/.netlify/functions/check-status/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/create-pix"
+  to = "/.netlify/functions/create-pix"
+  status = 200
+
+[[redirects]]
+  from = "/api/recovery"
+  to = "/.netlify/functions/recovery"
+  status = 200
