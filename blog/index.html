@@ -1,1 +1,458 @@
-aaa
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Certificado de Reservista: Guias e Passo a Passo</title>
+<meta name="description" content="Tudo sobre documentação militar: como tirar certificado de reservista, CDI, CAM, CI e mais. Guias completos e atualizados para 2026.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Blog — Guias sobre Documentação Militar">
+<meta property="og:description" content="Tudo sobre certificado de reservista, CDI, alistamento militar e documentação militar.">
+<meta property="og:type" content="website">
+<script>
+  var l = document.createElement('link');
+  l.rel = 'canonical'; l.href = window.location.href.split('?')[0];
+  document.head.appendChild(l);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ── Layout base ── */
+.blog-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 20px 0;
+}
+
+/* ── Labels de seção ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #718096;
+  margin-bottom: 14px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 32px 0;
+}
+
+/* ── Cards principais ── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.blog-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.blog-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(2,125,108,.08);
+}
+
+.blog-card-thumb {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+.thumb-green  { background: #ecfdf5; }
+.thumb-amber  { background: #fffbeb; }
+.thumb-blue   { background: #eff6ff; }
+.thumb-red    { background: #fff5f5; }
+
+.blog-card-body {
+  padding: 18px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.blog-card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+.tag-green  { background: #ecfdf5; color: #065f46; }
+.tag-amber  { background: #fffbeb; color: #92400e; }
+.tag-blue   { background: #eff6ff; color: #1e40af; }
+.tag-red    { background: #fff5f5; color: #9b1c1c; }
+
+.urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #fffbeb;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.blog-card h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a202c;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.blog-card p {
+  font-size: 13px;
+  color: #4a5568;
+  line-height: 1.6;
+  flex: 1;
+  margin: 0;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #718096;
+}
+.blog-card-read-green { font-size: 12px; font-weight: 600; color: #027d6c; }
+.blog-card-read-amber { font-size: 12px; font-weight: 600; color: #92400e; }
+
+/* ── Guias rápidos ── */
+.quick-guides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.quick-link {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color .2s, background .2s;
+}
+.quick-link:hover {
+  border-color: #6ee7b7;
+  background: #f0fdf4;
+}
+.quick-link-full { grid-column: 1 / -1; }
+
+.quick-emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+.quick-text { flex: 1; }
+.quick-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1a202c;
+  line-height: 1.3;
+}
+.quick-sub {
+  font-size: 11.5px;
+  color: #718096;
+  margin-top: 2px;
+}
+.quick-arrow {
+  font-size: 15px;
+  color: #a0aec0;
+  flex-shrink: 0;
+}
+
+/* ── Outros artigos (3 colunas) ── */
+.small-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.small-grid .blog-card-thumb { height: 90px; font-size: 32px; }
+.small-grid .blog-card h2    { font-size: 14px; }
+.small-grid .blog-card p     { font-size: 12.5px; }
+
+/* ── Banner de alerta ── */
+.alert-banner {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 0;
+}
+.alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.alert-title { font-size: 14px; font-weight: 700; color: #78350f; margin-bottom: 4px; }
+.alert-text  { font-size: 13px; color: #92400e; line-height: 1.55; }
+.alert-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #78350f;
+  background: #fff;
+  border: 1px solid #fcd34d;
+  border-radius: 6px;
+  padding: 6px 14px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.alert-cta:hover { background: #fef9c3; }
+
+/* ── Responsivo ── */
+@media (max-width: 640px) {
+  .blog-main       { padding: 32px 16px 0; }
+  .hero-grid       { grid-template-columns: 1fr; }
+  .quick-guides    { grid-template-columns: 1fr; }
+  .small-grid      { grid-template-columns: 1fr; }
+  .quick-link-full { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="header">
+  <a href="/blog" class="nav-logo">
+    <span class="nav-logo-icon">RD</span>
+    Reservista Digital
+  </a>
+  <button class="mobile-menu-btn" onclick="document.getElementById('nav-menu').classList.toggle('active')">&#9776;</button>
+  <nav class="nav-menu" id="nav-menu">
+    <button class="mobile-menu-btn" style="position:absolute;top:1rem;right:1rem"
+            onclick="document.getElementById('nav-menu').classList.remove('active')">&#10005;</button>
+    <ul>
+      <li><a href="/blog" style="color:#a7f3d0;font-weight:600">Blog</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ── CONTEÚDO PRINCIPAL ── -->
+<main class="blog-main">
+
+  <!-- SEÇÃO 1: MAIS BUSCADOS -->
+  <p class="section-label">Mais buscados agora</p>
+  <div class="hero-grid">
+
+    <a href="/blog/como-tirar-certificado-de-reservista.html" class="blog-card">
+      <div class="blog-card-thumb thumb-green">🪖</div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-green">Guia completo</span>
+        <h2>Como Tirar o Certificado de Reservista em 2026</h2>
+        <p>Passo a passo completo: online ou presencialmente, documentos necessários e prazos.</p>
+        <div class="blog-card-meta">
+          <span>8 min de leitura</span>
+          <span class="blog-card-read-green">Ler artigo →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="/blog/segunda-via-certificado-reservista.html" class="blog-card" style="border:1.5px solid #6ee7b7">
+      <div class="blog-card-thumb thumb-amber">📄</div>
+      <div class="blog-card-body">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="blog-card-tag tag-amber">Segunda via</span>
+          <span class="urgency-badge">🔥 Mais buscado</span>
+        </div>
+        <h2>Segunda Via do Certificado de Reservista: Como Solicitar em 2026</h2>
+        <p>Perdeu o certificado? Veja como pedir a 2ª via e os documentos necessários.</p>
+        <div class="blog-card-meta">
+          <span>5 min de leitura</span>
+          <span class="blog-card-read-amber">Solicitar agora →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- SEÇÃO 2: GUIAS RÁPIDOS -->
+  <p class="section-label">Guias rápidos</p>
+  <div class="quick-guides">
+
+    <a href="/blog/como-tirar-certificado-de-reservista.html" class="quick-link">
+      <span class="quick-emoji">🪖</span>
+      <div class="quick-text">
+        <div class="quick-title">Como tirar o Certificado de Reservista</div>
+        <div class="quick-sub">Para quem serviu nas Forças Armadas</div>
+      </div>
+      <span class="quick-arrow">→</span>
+    </a>
+
+    <a href="/blog/segunda-via-certificado-reservista.html" class="quick-link">
+      <span class="quick-emoji">📄</span>
+      <div class="quick-text">
+        <div class="quick-title">Como tirar a Segunda Via</div>
+        <div class="quick-sub">Perdeu ou danificou o certificado</div>
+      </div>
+      <span class="quick-arrow">→</span>
+    </a>
+
+    <a href="/blog/alistamento-militar-online.html" class="quick-link">
+      <span class="quick-emoji">📋</span>
+      <div class="quick-text">
+        <div class="quick-title">Como me alistar no serviço militar</div>
+        <div class="quick-sub">Jovens que completam 18 anos em 2026</div>
+      </div>
+      <span class="quick-arrow">→</span>
+    </a>
+
+    <a href="/blog/cdi-certificado-dispensa-incorporacao.html" class="quick-link">
+      <span class="quick-emoji">⭐</span>
+      <div class="quick-text">
+        <div class="quick-title">Como tirar o CDI</div>
+        <div class="quick-sub">Para quem foi dispensado da incorporação</div>
+      </div>
+      <span class="quick-arrow">→</span>
+    </a>
+
+    <a href="/blog/situacao-militar-irregular.html" class="quick-link quick-link-full">
+      <span class="quick-emoji">⚠️</span>
+      <div class="quick-text">
+        <div class="quick-title">Como regularizar minha situação militar</div>
+        <div class="quick-sub">Está irregular ou com pendências no sistema</div>
+      </div>
+      <span class="quick-arrow">→</span>
+    </a>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- SEÇÃO 3: OUTROS ARTIGOS -->
+  <p class="section-label">Outros artigos</p>
+  <div class="small-grid" style="margin-bottom:32px">
+
+    <a href="/blog/alistamento-militar-online.html" class="blog-card">
+      <div class="blog-card-thumb thumb-blue">📋</div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-blue">Alistamento</span>
+        <h2>Alistamento Militar Online 2026</h2>
+        <p>Documentos, prazos e o que acontece após o cadastro.</p>
+        <div class="blog-card-meta">
+          <span>7 min</span>
+          <span class="blog-card-read-green">Ler →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="/blog/cdi-certificado-dispensa-incorporacao.html" class="blog-card">
+      <div class="blog-card-thumb thumb-green">⭐</div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-green">CDI</span>
+        <h2>CDI — Certificado de Dispensa: O Que É e Como Tirar</h2>
+        <p>Diferença entre CDI e Reservista, quem tem direito e como emitir.</p>
+        <div class="blog-card-meta">
+          <span>6 min</span>
+          <span class="blog-card-read-green">Ler →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="/blog/situacao-militar-irregular.html" class="blog-card">
+      <div class="blog-card-thumb thumb-red">⚠️</div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-red">Regularização</span>
+        <h2>Situação Militar Irregular: Consequências e Como Regularizar</h2>
+        <p>Está irregular? Veja o que pode acontecer e como resolver.</p>
+        <div class="blog-card-meta">
+          <span>6 min</span>
+          <span class="blog-card-read-green">Ler →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- SEÇÃO 4: BANNER DE ALERTA -->
+  <div class="alert-banner" id="alertBanner">
+    <div class="alert-icon">⏰</div>
+    <div>
+      <div class="alert-title">Alistamento Militar 2026 — Prazo em andamento</div>
+      <div class="alert-text">
+        O alistamento obrigatório vai de janeiro a junho do ano em que o jovem completa 18 anos.
+        Se você nasceu em 2008, <strong>o prazo encerra em 30 de junho de 2026</strong>.
+        Não se alistar gera multa e pode impedir acesso a emprego público, passaporte e crédito.
+      </div>
+      <a href="/blog/alistamento-militar-online.html" class="alert-cta">
+        → Ver como se alistar agora
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="footer" style="margin-top:48px">
+  <div class="footer-column">
+    <strong style="font-size:1.1rem;display:flex;align-items:center;gap:.5rem;justify-content:center">
+      <span class="nav-logo-icon">RD</span> Reservista Digital
+    </strong>
+    <p style="color:#a7f3d0;font-size:.9rem;margin-top:.5rem">
+      Guias informativos para documentação militar. Não somos órgão público.
+    </p>
+  </div>
+  <div class="footer-column">
+    <h3>Navegação</h3>
+    <ul>
+      <li><a href="/blog">Blog</a></li>
+    </ul>
+  </div>
+  <div class="footer-column"></div>
+  <div class="footer-column">
+    <h3>Legal</h3>
+    <ul>
+      <li><a href="../politica-privacidade.html">Política de Privacidade</a></li>
+      <li><a href="../termos-de-uso.html">Termos de Uso</a></li>
+    </ul>
+  </div>
+  <div class="copyright">
+    © 2026 Reservista Digital. Todos os direitos reservados.
+    GILVANIR BARBOSA DE CASTRO
+  </div>
+</footer>
+
+<script>
+  // Remove o banner automaticamente após o prazo de alistamento
+  if (new Date() > new Date('2026-06-30T23:59:59')) {
+    var banner = document.getElementById('alertBanner');
+    if (banner) banner.remove();
+  }
+</script>
+
+</body>
+</html>
