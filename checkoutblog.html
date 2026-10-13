@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emissão de Taxa — EdocBr</title>
+<!-- Google tag (gtag.js) — 2 contas rodando o mesmo site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18041159133"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18041159133');
+  gtag('config', 'AW-18039069245');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:       #027d6c;
+  --primary-hover: #015f52;
+  --primary-light: #f0faf8;
+  --primary-glow:  rgba(2,125,108,0.15);
+  --white:         #ffffff;
+  --bg-page:       #f0f4f8;
+  --border:        #e2e8f0;
+  --text-heading:  #013d34;
+  --text-body:     #1a202c;
+  --text-muted:    #4a5568;
+  --text-faint:    #718096;
+  --success:       #027d6c;
+  --success-light: #f0faf8;
+  --danger:        #c0392b;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-page);
+  margin: 0; padding: 0;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  font-size: 16px; color: var(--text-body);
+}
+.navbar {
+  background: #027d6c;
+  padding: 0.75rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--white); font-weight: 700; font-size: 1.05rem; }
+.nav-logo-icon { width: 30px; height: 30px; border-radius: 7px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--white); }
+.nav-logo-icon svg { width: 19px; height: 19px; color: var(--white); }
+.stepper-wrap { background: var(--white); border-bottom: 1px solid var(--border); padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.s-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all 0.25s; }
+.s-dot.active { background: var(--primary); transform: scale(1.3); }
+.s-dot.done { background: var(--primary); opacity: 0.4; }
+.main { flex: 1; display: flex; justify-content: center; padding: 16px 16px 120px; }
+.card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; width: 100%; max-width: 460px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); }
+.card-header-label { font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.card-header-title { font-size: 17px; font-weight: 800; color: var(--text-heading); line-height: 1.3; }
+.card-header-title span { color: var(--primary); }
+.panel { display: none; padding: 20px; }
+.panel.active { display: block; animation: fadeUp 0.2s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.panel-title { font-size: 14px; font-weight: 700; color: var(--text-heading); margin-bottom: 16px; }
+.fg { margin-bottom: 14px; }
+.fg label { display: block; font-size: 13px; font-weight: 600; color: var(--text-body); margin-bottom: 5px; }
+.fg label .req { color: var(--danger); }
+.fg input, .fg select {
+  width: 100%; padding: 12px 13px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 16px; font-family: 'Inter', sans-serif;
+  color: var(--text-body); background: var(--white);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none; -webkit-appearance: none;
+}
+.fg select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px; cursor: pointer;
+}
+.fg input:focus, .fg select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); outline: none; }
+.fg.error input, .fg.error select { border-color: var(--danger); box-shadow: 0 0 0 3px rgba(192,57,43,0.08); }
+.fg-error { font-size: 12px; color: var(--danger); margin-top: 3px; display: none; }
+.fg.error .fg-error { display: block; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tipo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.tipo-card { border: 2px solid var(--border); border-radius: 9px; padding: 14px 12px; cursor: pointer; transition: all 0.15s; text-align: center; position: relative; background: var(--white); }
+.tipo-card:hover { border-color: var(--primary); background: var(--primary-light); }
+.tipo-card.selected { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 3px var(--primary-glow); }
+.tipo-card-icon { display: flex; align-items: center; justify-content: center; margin-bottom: 6px; color: var(--primary); }
+.tipo-card-icon svg { width: 26px; height: 26px; }
+.tipo-card-label { font-size: 13px; font-weight: 700; color: var(--text-heading); display: block; }
+.tipo-card-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: block; }
+.tipo-card .chk { position: absolute; top: 7px; right: 7px; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); color: white; display: none; align-items: center; justify-content: center; }
+.tipo-card.selected .chk { display: flex; }
+.confirm-box { background: var(--bg-page); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+.confirm-box-header { background: var(--primary); padding: 10px 16px; font-size: 12px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+.confirm-box-header svg { width: 14px; height: 14px; opacity: 0.8; }
+.confirm-body { padding: 16px; }
+.confirm-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+.confirm-row:last-child { margin-bottom: 0; }
+.confirm-key { font-size: 11px; font-weight: 600; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; flex-shrink: 0; min-width: 48px; }
+.confirm-val { font-size: 14px; font-weight: 600; color: var(--text-heading); }
+.confirm-val.name-big { font-size: 16px; font-weight: 700; }
+.confirm-divider { height: 1px; background: var(--border); margin: 10px 0; }
+.confirm-tipo-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--primary-light); border: 1px solid #a7f3d0; border-radius: 5px; padding: 4px 10px; font-size: 12px; font-weight: 700; color: var(--primary); margin-top: 4px; }
+.taxa-box { background: var(--bg-page); border: 2px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+.taxa-body { padding: 16px 18px; }
+.taxa-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.taxa-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.taxa-row-key { font-size: 12px; color: var(--text-faint); }
+.taxa-row-val { font-size: 13px; font-weight: 600; color: var(--text-body); text-align: right; max-width: 60%; }
+.taxa-total-row { display: flex; align-items: center; justify-content: space-between; background: #f0faf8; border: 1px solid #a7d4cc; border-radius: 8px; padding: 12px 14px; margin-top: 2px; }
+.taxa-total-label { font-size: 13px; font-weight: 600; color: var(--text-body); }
+.taxa-total-value { font-size: 22px; font-weight: 800; color: #027d6c; letter-spacing: -0.5px; }
+.taxa-pix-badge { display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 10px 13px; margin-top: 10px; }
+.taxa-pix-badge svg { flex-shrink: 0; }
+.taxa-pix-text { font-size: 12px; color: var(--text-muted); }
+.taxa-pix-text strong { color: #027d6c; display: flex; align-items: center; gap: 5px; font-size: 11px; margin-top: 2px; }
+.taxa-pix-text strong svg { width: 13px; height: 13px; flex-shrink: 0; }
+.qr-box { width: 156px; height: 156px; background: var(--white); border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.qr-box img { width: 100%; height: 100%; object-fit: contain; }
+.pix-status { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 13px; color: var(--primary); font-weight: 500; padding: 6px 0; }
+.spinner { width: 13px; height: 13px; border: 2px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.success-panel { display: none; text-align: center; padding: 40px 20px; }
+.success-panel.active { display: block; }
+.success-icon { width: 68px; height: 68px; border-radius: 50%; background: #f0faf8; border: 2px solid #a7d4cc; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px; color: #027d6c; animation: popIn 0.4s ease; }
+@keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.success-icon svg { width: 36px; height: 36px; }
+.success-panel h2 { font-size: 22px; font-weight: 700; color: var(--text-heading); margin-bottom: 8px; }
+.success-panel p { font-size: 14px; color: var(--text-muted); line-height: 1.7; max-width: 320px; margin: 0 auto; }
+.btn-open-guide { display: inline-flex; align-items: center; gap: 9px; margin-top: 24px; padding: 14px 28px; background: #027d6c; color: var(--white); border: none; border-radius: 9px; font-size: 15px; font-weight: 700; text-decoration: none; font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(2,125,108,0.3); transition: all 0.2s; cursor: pointer; }
+.btn-open-guide:hover { background: #015f52; transform: translateY(-1px); }
+.cta-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); padding: 12px 16px 22px; z-index: 90; }
+.cta-bar.hidden { display: none; }
+.btn-cta { width: 100%; padding: 16px; background: var(--primary); color: var(--white); border: none; border-radius: 10px; font-size: 16px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 9px; transition: all 0.15s; box-shadow: 0 4px 12px rgba(2,125,108,0.28); }
+.btn-cta:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-cta:active { transform: scale(0.99); }
+.btn-cta:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-cta svg { width: 17px; height: 17px; flex-shrink: 0; }
+.btn-cta.green { background: #027d6c; box-shadow: 0 4px 12px rgba(2,125,108,0.28); }
+.btn-cta.green:hover { background: #015f52; }
+.btn-back { background: none; border: none; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text-faint); cursor: pointer; padding: 8px 0 0; text-align: center; display: block; width: 100%; }
+.btn-back:hover { color: var(--text-muted); }
+.secure-note { text-align: center; font-size: 11px; color: var(--text-faint); padding-top: 6px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.secure-note svg { width: 11px; height: 11px; }
+.footer { background: var(--white); border-top: 1px solid var(--border); padding: 16px 20px; text-align: center; }
+.footer p { font-size: 12px; color: var(--text-faint); line-height: 1.6; margin: 0; }
+.footer p+p { margin-top: 3px; }
+.footer-disclaimer { display: inline-flex; align-items: center; gap: 5px; }
+.footer-disclaimer svg { width: 12px; height: 12px; flex-shrink: 0; color: var(--text-faint); }
+@media (min-width: 601px) {
+  .cta-bar { position: static; border: none; padding: 0 20px 20px; background: transparent; }
+  .main { padding: 28px 24px 64px; }
+  .btn-cta { max-width: 460px; margin: 0 auto; display: flex; }
+  .btn-back { max-width: 460px; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  .main { padding: 0 0 120px; }
+  .card { border-radius: 0; border-left: none; border-right: none; border-top: none; }
+  .row2 { grid-template-columns: 1fr; }
+  .tipo-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tipo-card { padding: 13px 8px; }
+}
+
+/* === PIX SCREEN REDESIGN === */
+.pix-hero{text-align:center;padding:24px 16px 20px;}
+.pix-hero-icon{width:64px;height:64px;border-radius:50%;background:#f0faf8;border:2px solid #a7d4cc;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.pix-hero-sub{font-size:13px;color:var(--text-muted);margin-bottom:6px;}
+.pix-hero-title{font-size:19px;font-weight:800;color:var(--text-heading);line-height:1.35;}
+.pix-hero-title span{color:var(--primary);}
+.pix-dados{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;margin:0 20px 14px;}
+.pix-dados-label{font-size:10px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+.pix-dados-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:13px;}
+.pix-dados-row span:first-child{color:#4a5568;}
+.pix-dados-row span:last-child{font-weight:600;color:#013d34;font-family:monospace;font-size:12px;}
+.pix-dados-row.nome span:last-child{font-family:inherit;font-size:13px;}
+.pix-dados-ok{display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:12px;color:#027d6c;font-weight:500;}
+.pix-instructions{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin:0 20px 16px;}
+.pix-instr-title{font-size:13px;font-weight:700;color:var(--text-heading);margin-bottom:12px;}
+.pix-steps{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-direction:column;gap:10px;}
+.pix-steps li{font-size:13px;color:var(--text-body);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.pix-step-num{width:20px;height:20px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;font-weight:700;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.pix-code-box{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:11px 13px;margin-bottom:12px;font-family:monospace;font-size:11.5px;color:#1a202c;word-break:break-all;line-height:1.6;max-height:68px;overflow:hidden;position:relative;}
+.pix-code-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(transparent,#f8fafc);pointer-events:none;}
+.pix-timer-row{display:flex;align-items:center;gap:6px;font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #f59e0b;border-radius:6px;padding:7px 11px;}
+.pix-timer-row svg{width:13px;height:13px;flex-shrink:0;}
+.pix-timer-row .pix-expiry-time{font-weight:700;}
+.btn-copy-pix-new{width:calc(100% - 40px);margin:16px 20px 0;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .15s;box-shadow:0 4px 12px rgba(2,125,108,.25);}
+.btn-copy-pix-new:hover{background:var(--primary-hover);}
+.btn-copy-pix-new.copied{background:#27ae60;}
+.pix-secondary{padding:14px 20px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.btn-verify-link{background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;padding:0;text-decoration:underline;}
+.btn-verify-link:hover{color:var(--primary-hover);}
+.btn-verify-link:disabled{opacity:.6;cursor:not-allowed;}
+.pix-qr-link{font-size:12px;color:var(--text-faint);cursor:pointer;font-family:'Inter',sans-serif;padding:0;}
+
+/* === NOVO: bloco de reassegurança 2ª via === */
+.via2-reassure{display:none;background:#f0faf8;border:1px solid #a7d4cc;border-radius:10px;padding:13px 14px;margin:0 20px 16px;}
+.via2-reassure.show{display:block;}
+.via2-reassure-head{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--text-heading);margin-bottom:6px;}
+.via2-reassure-head svg{width:18px;height:18px;color:var(--primary);flex-shrink:0;}
+.via2-reassure p{font-size:12.5px;color:var(--text-muted);line-height:1.55;margin:0;}
+
+/* === NOVO: linha de confiança (star) === */
+.pix-trust{display:flex;align-items:center;justify-content:center;gap:7px;margin:0 20px 4px;font-size:12px;color:var(--text-muted);}
+.pix-trust svg{width:15px;height:15px;color:var(--primary);flex-shrink:0;}
+
+/* === NOVO: bloco de suporte WhatsApp === */
+.pix-support{display:none;align-items:center;gap:11px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:0 20px 16px;text-decoration:none;transition:border-color .15s, box-shadow .15s;}
+.pix-support.show{display:flex;}
+.pix-support:hover{border-color:#25D366;box-shadow:0 0 0 3px rgba(37,211,102,.12);}
+.pix-support-ic{width:36px;height:36px;border-radius:9px;background:#25D366;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.pix-support-ic svg{width:21px;height:21px;color:#fff;}
+.pix-support-txt{font-size:12.5px;color:var(--text-muted);line-height:1.45;}
+.pix-support-txt strong{display:block;color:var(--text-heading);font-size:13px;margin-bottom:1px;}
+</style>
+</head>
+<body>
+
+<header class="navbar" id="main-navbar">
+  <a href="/blog" class="nav-logo">
+    <span class="nav-logo-icon"><svg viewBox="0 0 512.003 512.003" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M506.528,243.478l-35.22-16.107l-12.073-36.68C426.019,89.756,328.779,24.227,222.744,31.346 c-58.825,3.948-113.471,29.768-153.869,72.706C28.462,147.005,6.043,203.119,5.749,262.058 c-0.272,54.539-3.015,74.043-5.267,80.801c-1.454,4.36,0.471,9.131,4.545,11.262c2.133,1.117,43.032,21.911,122.941,21.911 c15.817,0,33.18-0.823,52.06-2.768v98.554c0,5.173,4.194,9.367,9.367,9.367h39.33c5.173,0,9.367-4.194,9.367-9.367v-121.11 l34.75-34.75c7.134-7.135,16.604-11.501,26.664-12.29l203.862-16.008c4.875-0.383,8.634-4.45,8.634-9.339v-26.325 C512,248.332,509.862,245.002,506.528,243.478z M20.281,340.333c2.635-14.714,4.015-40.487,4.203-78.183 c0.27-54.183,20.88-105.771,58.035-145.26c37.147-39.48,87.392-63.222,141.481-66.851c97.475-6.547,186.898,53.704,217.442,146.51 l9.846,29.915c-52.589,6.478-160.152,9.21-264.424,11.858c-21.407,0.543-42.585,1.082-62.993,1.645 c-23.541,0.648-44.841,14.051-55.585,34.974l-35.758,69.593C27.409,342.971,23.317,341.512,20.281,340.333z M219.357,462.45 h-20.596v-91.436c0.592-0.08,1.165-0.147,1.76-0.23c6.558-0.913,12.932-2.911,18.836-5.851V462.45z M493.266,269.66 l-195.228,15.33c-14.504,1.139-28.158,7.433-38.445,17.72l-37.495,37.495c-6.488,6.488-15.068,10.757-24.16,12.024 c-67.182,9.354-116.284,3.911-146.834-2.853l33.847-65.876c7.621-14.841,22.733-24.347,39.438-24.807 c20.396-0.565,41.558-1.102,62.951-1.644c110.601-2.808,224.889-5.71,275.006-13.178l30.921,14.141V269.66z"/></svg></span>
+    EdocBr
+  </a>
+</header>
+
+<div class="stepper-wrap" id="main-stepper">
+  <div class="s-dot active" id="dot-1"></div>
+  <div class="s-dot" id="dot-2"></div>
+  <div class="s-dot" id="dot-3"></div>
+</div>
+
+<main class="main">
+  <div class="card">
+    <div class="card-header" id="card-header">
+      <div class="card-header-label">Solicitação de e-Doc Tipo:</div>
+      <div class="card-header-title"><span id="header-tipo">Certificado de Reservista</span></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="panel active" id="panel-1">
+      <div class="panel-title">Verificação de Dados</div>
+      <div class="fg" id="fg-cpf">
+        <label for="cpf">CPF <span class="req">*</span></label>
+        <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
+        <div class="fg-error">CPF inválido</div>
+      </div>
+      <div class="fg" id="fg-name">
+        <label for="name">Nome completo <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="Seu nome completo" autocomplete="name">
+        <div class="fg-error">Informe seu nome</div>
+      </div>
+      <div class="fg">
+        <label>Tipo de via <span class="req">*</span></label>
+        <div class="tipo-grid">
+          <div class="tipo-card" data-via="1" onclick="selectTipo(this)">
+            <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="tipo-card-icon"><svg viewBox="-1 0 19 19" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.594 1.975a8 8 0 0 1 1.895.795 7.857 7.857 0 0 1 1.604 1.237 8.05 8.05 0 0 1 1.241 1.6 7.909 7.909 0 0 1 0 7.991 8.021 8.021 0 0 1-2.845 2.845 7.888 7.888 0 0 1-4.007 1.082 7.825 7.825 0 0 1-3.985-1.082 8.039 8.039 0 0 1-1.599-1.241 7.848 7.848 0 0 1-1.237-1.604 8 8 0 0 1-.795-1.895 7.86 7.86 0 0 1-.283-2.112 7.782 7.782 0 0 1 .283-2.098 7.902 7.902 0 0 1 5.518-5.518 7.764 7.764 0 0 1 2.098-.283 7.848 7.848 0 0 1 2.112.283zM6.682 3.043A6.793 6.793 0 0 0 1.933 7.79a6.688 6.688 0 0 0-.241 1.8 6.764 6.764 0 0 0 .242 1.815 6.915 6.915 0 0 0 .685 1.634 6.775 6.775 0 0 0 1.063 1.378 6.975 6.975 0 0 0 1.38 1.071 6.822 6.822 0 0 0 5.235.686 6.789 6.789 0 0 0 3.012-1.757 6.925 6.925 0 0 0 1.07-1.382 6.785 6.785 0 0 0 .93-3.445 6.722 6.722 0 0 0-.929-3.42 6.967 6.967 0 0 0-1.07-1.38 6.77 6.77 0 0 0-1.38-1.063 6.936 6.936 0 0 0-1.633-.685A6.775 6.775 0 0 0 8.482 2.8a6.695 6.695 0 0 0-1.8.243zm2.84 10.095V6.58H8.106L5.948 8.164l.806 1.103 1.222-.945v4.816z"/></svg></span>
+            <span class="tipo-card-label">1ª Via</span>
+            <span class="tipo-card-desc">Primeira solicitação</span>
+          </div>
+          <div class="tipo-card" data-via="2" onclick="selectTipo(this)">
+            <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="tipo-card-icon"><svg viewBox="-1 0 19 19" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.594 1.975a8 8 0 0 1 1.895.795 7.857 7.857 0 0 1 1.604 1.237 8.05 8.05 0 0 1 1.241 1.6 7.909 7.909 0 0 1 0 7.991 8.021 8.021 0 0 1-2.845 2.845 7.888 7.888 0 0 1-4.007 1.082 7.825 7.825 0 0 1-3.985-1.082 8.039 8.039 0 0 1-1.599-1.241 7.848 7.848 0 0 1-1.237-1.604 8 8 0 0 1-.795-1.895 7.86 7.86 0 0 1-.283-2.112 7.782 7.782 0 0 1 .283-2.098 7.902 7.902 0 0 1 5.518-5.518 7.764 7.764 0 0 1 2.098-.283 7.848 7.848 0 0 1 2.112.283zM6.682 3.043A6.793 6.793 0 0 0 1.933 7.79a6.688 6.688 0 0 0-.241 1.8 6.764 6.764 0 0 0 .242 1.815 6.916 6.916 0 0 0 .685 1.634 6.775 6.775 0 0 0 1.063 1.378 6.975 6.975 0 0 0 1.38 1.071 6.822 6.822 0 0 0 5.235.686 6.789 6.789 0 0 0 3.012-1.757 6.924 6.924 0 0 0 1.07-1.382 6.785 6.785 0 0 0 .93-3.445 6.722 6.722 0 0 0-.929-3.42 6.967 6.967 0 0 0-1.07-1.38 6.77 6.77 0 0 0-1.38-1.063 6.937 6.937 0 0 0-1.633-.685A6.775 6.775 0 0 0 8.482 2.8a6.695 6.695 0 0 0-1.8.243zm4.176 10.095v-1.352H8.18l1.52-1.353q.222-.203.43-.412a2.996 2.996 0 0 0 .371-.449 2.115 2.115 0 0 0 .255-.523 2.028 2.028 0 0 0 .092-.635 1.89 1.89 0 0 0-.199-.889 1.853 1.853 0 0 0-.532-.63 2.296 2.296 0 0 0-.76-.37 3.23 3.23 0 0 0-.88-.12 2.854 2.854 0 0 0-.912.144 2.376 2.376 0 0 0-.764.42 2.315 2.315 0 0 0-.551.666 2.346 2.346 0 0 0-.273.89l1.491.204a1.232 1.232 0 0 1 .292-.717.893.893 0 0 1 1.227-.057.76.76 0 0 1 .222.57 1 1 0 0 1-.148.535 2.418 2.418 0 0 1-.389.472l-2.556 2.311v1.295z"/></svg></span>
+            <span class="tipo-card-label">2ª Via</span>
+            <span class="tipo-card-desc">Segunda via</span>
+          </div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="fg" id="fg-email">
+          <label for="email">E-mail <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
+          <div class="fg-error">E-mail inválido</div>
+        </div>
+        <div class="fg" id="fg-phone">
+          <label for="phone">Celular <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="(11) 99999-9999" autocomplete="tel">
+          <div class="fg-error">Confira seu celular com DDD (ex.: (11) 99999-9999)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="panel" id="panel-2">
+      <div class="panel-title">Confirme seus Dados</div>
+      <div class="confirm-box">
+        <div class="confirm-box-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Dados Pessoais
+        </div>
+        <div class="confirm-body">
+          <div class="confirm-val name-big" id="confirm-name">—</div>
+          <div style="margin-top:8px;">
+            <div class="confirm-row"><span class="confirm-key">CPF</span><span class="confirm-val" id="confirm-cpf">—</span></div>
+            <div class="confirm-row"><span class="confirm-key">E-mail</span><span class="confirm-val" id="confirm-email">—</span></div>
+            <div class="confirm-row"><span class="confirm-key">Celular</span><span class="confirm-val" id="confirm-phone">—</span></div>
+          </div>
+          <div class="confirm-divider"></div>
+          <div class="confirm-tipo-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span id="confirm-tipo-text">1ª Via — Certificado de Reservista</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-faint);text-align:center;margin:0;">
+        Dados incorretos? <button onclick="goToStep(1)" style="background:none;border:none;color:var(--primary);font-weight:600;cursor:pointer;font-size:12px;padding:0;">Corrigir</button>
+      </p>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="panel" id="panel-3">
+      <div class="taxa-box">
+        <div class="taxa-body">
+          <div class="taxa-row"><span class="taxa-row-key">Solicitante</span><span class="taxa-row-val" id="taxa-nome">—</span></div>
+          <div class="taxa-row"><span class="taxa-row-key">CPF</span><span class="taxa-row-val" id="taxa-cpf">—</span></div>
+          <div class="taxa-row"><span class="taxa-row-key">Documento</span><span class="taxa-row-val" id="taxa-doc">—</span></div>
+          <div class="taxa-row"><span class="taxa-row-key">Referência</span><span class="taxa-row-val" id="taxa-ref">—</span></div>
+          <div class="taxa-total-row">
+            <span class="taxa-total-label">Valor da taxa</span>
+            <span class="taxa-total-value" id="taxa-valor">—</span>
+          </div>
+          <div class="taxa-pix-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28" height="28"><path fill="#4db6ac" d="M11.9,12h-0.68l8.04-8.04c2.62-2.61,6.86-2.61,9.48,0L36.78,12H36.1c-1.6,0-3.11,0.62-4.24,1.76l-6.8,6.77c-0.59,0.59-1.53,0.59-2.12,0l-6.8-6.77C15.01,12.62,13.5,12,11.9,12z"/><path fill="#4db6ac" d="M36.1,36h0.68l-8.04,8.04c-2.62,2.61-6.86,2.61-9.48,0L11.22,36h0.68c1.6,0,3.11-0.62,4.24-1.76l6.8-6.77c0.59-0.59,1.53-0.59,2.12,0l6.8,6.77C32.99,35.38,34.5,36,36.1,36z"/><path fill="#4db6ac" d="M44.04,28.74L38.78,34H36.1c-1.07,0-2.07-0.42-2.83-1.17l-6.8-6.78c-1.36-1.36-3.58-1.36-4.94,0l-6.8,6.78C13.97,33.58,12.97,34,11.9,34H9.22l-5.26-5.26c-2.61-2.62-2.61-6.86,0-9.48L9.22,14h2.68c1.07,0,2.07,0.42,2.83,1.17l6.8,6.78c0.68,0.68,1.58,1.02,2.47,1.02s1.79-0.34,2.47-1.02l6.8-6.78C34.03,14.42,35.03,14,36.1,14h2.68l5.26,5.26C46.65,21.88,46.65,26.12,44.04,28.74z"/></svg>
+            <div class="taxa-pix-text">Pagamento via PIX<strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Liberação imediata após pagamento</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: PIX -->
+    <div class="panel" id="panel-4">
+      <div class="pix-hero">
+        <div class="pix-hero-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30" height="30"><path fill="#4db6ac" d="M11.9,12h-0.68l8.04-8.04c2.62-2.61,6.86-2.61,9.48,0L36.78,12H36.1c-1.6,0-3.11,0.62-4.24,1.76l-6.8,6.77c-0.59,0.59-1.53,0.59-2.12,0l-6.8-6.77C15.01,12.62,13.5,12,11.9,12z"/><path fill="#4db6ac" d="M36.1,36h0.68l-8.04,8.04c-2.62,2.61-6.86,2.61-9.48,0L11.22,36h0.68c1.6,0,3.11-0.62,4.24-1.76l6.8-6.77c0.59-0.59,1.53-0.59,2.12,0l6.8,6.77C32.99,35.38,34.5,36,36.1,36z"/><path fill="#4db6ac" d="M44.04,28.74L38.78,34H36.1c-1.07,0-2.07-0.42-2.83-1.17l-6.8-6.78c-1.36-1.36-3.58-1.36-4.94,0l-6.8,6.78C13.97,33.58,12.97,34,11.9,34H9.22l-5.26-5.26c-2.61-2.62-2.61-6.86,0-9.48L9.22,14h2.68c1.07,0,2.07,0.42,2.83,1.17l6.8,6.78c0.68,0.68,1.58,1.02,2.47,1.02s1.79-0.34,2.47-1.02l6.8-6.78C34.03,14.42,35.03,14,36.1,14h2.68l5.26,5.26C46.65,21.88,46.65,26.12,44.04,28.74z"/></svg>
+        </div>
+        <div class="pix-hero-sub">Falta pouco!</div>
+        <div class="pix-hero-title">Pague <span id="pix-header-amount">—</span> via PIX<br>para pagar sua taxa</div>
+      </div>
+
+      <!-- NOVO: reassegurança específica de 2ª via (só aparece quando via = 2) -->
+      <div class="via2-reassure" id="via2-reassure">
+        <div class="via2-reassure-head">
+          <svg viewBox="-1 0 19 19" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.594 1.975a8 8 0 0 1 1.895.795 7.857 7.857 0 0 1 1.604 1.237 8.05 8.05 0 0 1 1.241 1.6 7.909 7.909 0 0 1 0 7.991 8.021 8.021 0 0 1-2.845 2.845 7.888 7.888 0 0 1-4.007 1.082 7.825 7.825 0 0 1-3.985-1.082 8.039 8.039 0 0 1-1.599-1.241 7.848 7.848 0 0 1-1.237-1.604 8 8 0 0 1-.795-1.895 7.86 7.86 0 0 1-.283-2.112 7.782 7.782 0 0 1 .283-2.098 7.902 7.902 0 0 1 5.518-5.518 7.764 7.764 0 0 1 2.098-.283 7.848 7.848 0 0 1 2.112.283zM6.682 3.043A6.793 6.793 0 0 0 1.933 7.79a6.688 6.688 0 0 0-.241 1.8 6.764 6.764 0 0 0 .242 1.815 6.916 6.916 0 0 0 .685 1.634 6.775 6.775 0 0 0 1.063 1.378 6.975 6.975 0 0 0 1.38 1.071 6.822 6.822 0 0 0 5.235.686 6.789 6.789 0 0 0 3.012-1.757 6.924 6.924 0 0 0 1.07-1.382 6.785 6.785 0 0 0 .93-3.445 6.722 6.722 0 0 0-.929-3.42 6.967 6.967 0 0 0-1.07-1.38 6.77 6.77 0 0 0-1.38-1.063 6.937 6.937 0 0 0-1.633-.685A6.775 6.775 0 0 0 8.482 2.8a6.695 6.695 0 0 0-1.8.243zm4.176 10.095v-1.352H8.18l1.52-1.353q.222-.203.43-.412a2.996 2.996 0 0 0 .371-.449 2.115 2.115 0 0 0 .255-.523 2.028 2.028 0 0 0 .092-.635 1.89 1.89 0 0 0-.199-.889 1.853 1.853 0 0 0-.532-.63 2.296 2.296 0 0 0-.76-.37 3.23 3.23 0 0 0-.88-.12 2.854 2.854 0 0 0-.912.144 2.376 2.376 0 0 0-.764.42 2.315 2.315 0 0 0-.551.666 2.346 2.346 0 0 0-.273.89l1.491.204a1.232 1.232 0 0 1 .292-.717.893.893 0 0 1 1.227-.057.76.76 0 0 1 .222.57 1 1 0 0 1-.148.535 2.418 2.418 0 0 1-.389.472l-2.556 2.311v1.295z"/></svg>
+          Sobre a 2ª via
+        </div>
+        <p>Mesmo quem já teve o documento precisa fazer uma nova solicitação para emitir a 2ª via — é um processo normal e você está no lugar certo. Após o pagamento, o acesso é liberado na hora.</p>
+      </div>
+
+      <div class="pix-instructions">
+        <div class="pix-instr-title">Instruções de pagamento</div>
+        <ul class="pix-steps">
+          <li><span class="pix-step-num">1</span><span>Acesse seu Internet Banking ou app de pagamentos.</span></li>
+          <li><span class="pix-step-num">2</span><span>Escolha pagar via <strong>Pix → Copia e Cola</strong>.</span></li>
+          <li><span class="pix-step-num">3</span><span>Cole o código abaixo e confirme.</span></li>
+        </ul>
+        <div class="pix-code-box" id="pix-code-preview">—</div>
+        <div class="pix-timer-row" id="pix-expiry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Pague e será creditado na hora · Expira em <span class="pix-expiry-time" id="pix-timer">30:00</span>
+        </div>
+      </div>
+
+      <button class="btn-copy-pix-new" id="btn-copy-pix">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copiar código
+      </button>
+
+      <div class="pix-secondary">
+        <button class="btn-verify-link" id="btn-verify">Já paguei — Verificar pagamento</button>
+        <div class="pix-status" id="pix-status"><span class="spinner"></span> Aguardando pagamento...</div>
+        <details style="width:100%;text-align:center;margin-top:4px;">
+          <summary class="pix-qr-link">Prefiro pagar com QR Code</summary>
+          <div style="padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="qr-box" id="pix-qr" style="margin:0 auto;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+            <p style="font-size:12px;color:var(--text-faint);margin:0;">Escaneie com a câmera do app</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- NOVO: linha de confiança com ícone star-circle -->
+      <div class="pix-trust">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10.5766 8.20419C11.2099 7.06806 11.5266 6.5 12 6.5C12.4734 6.5 12.7901 7.06806 13.4234 8.20419L13.5873 8.49812C13.7672 8.82097 13.8572 8.98239 13.9975 9.0889C14.1378 9.19541 14.3126 9.23495 14.6621 9.31402L14.9802 9.38601C16.2101 9.66428 16.825 9.80341 16.9713 10.2739C17.1176 10.7443 16.6984 11.2345 15.86 12.215L15.643 12.4686C15.4048 12.7472 15.2857 12.8865 15.2321 13.0589C15.1785 13.2312 15.1965 13.4171 15.2325 13.7888L15.2653 14.1272C15.3921 15.4353 15.4554 16.0894 15.0724 16.3801C14.6894 16.6709 14.1137 16.4058 12.9622 15.8756L12.6643 15.7384C12.337 15.5878 12.1734 15.5124 12 15.5124C11.8266 15.5124 11.663 15.5878 11.3357 15.7384L11.0378 15.8756C9.88634 16.4058 9.31059 16.6709 8.92757 16.3801C8.54456 16.0894 8.60794 15.4353 8.7347 14.1272L8.76749 13.7888C8.80351 13.4171 8.82152 13.2312 8.76793 13.0589C8.71434 12.8865 8.59521 12.7472 8.35696 12.4686L8.14005 12.215C7.30162 11.2345 6.88241 10.7443 7.02871 10.2739C7.17501 9.80341 7.78993 9.66428 9.01977 9.38601L9.33794 9.31402C9.68743 9.23495 9.86217 9.19541 10.0025 9.0889C10.1428 8.98239 10.2328 8.82097 10.4127 8.49812L10.5766 8.20419Z" stroke="currentColor" stroke-width="1.5"/></svg>
+        Pagamento processado em ambiente seguro
+      </div>
+
+      <!-- NOVO: bloco de suporte WhatsApp (aparece só se SUPORTE_WHATSAPP estiver configurado) -->
+      <a class="pix-support" id="pix-support" href="#" target="_blank" rel="noopener">
+        <span class="pix-support-ic">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M20.52 3.45A11.77 11.77 0 0 0 12.04 0 11.94 11.94 0 0 0 .06 11.94a11.86 11.86 0 0 0 1.6 5.96L0 24l6.27-1.64a11.9 11.9 0 0 0 5.76 1.47h.01a11.94 11.94 0 0 0 11.94-11.93 11.86 11.86 0 0 0-3.46-8.42zM12.04 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.64-.24-.37a9.86 9.86 0 0 1-1.51-5.25 9.91 9.91 0 0 1 9.92-9.9c2.65 0 5.13 1.03 7 2.9a9.82 9.82 0 0 1 2.89 6.99 9.91 9.91 0 0 1-9.9 9.9z"/></svg>
+        </span>
+        <span class="pix-support-txt"><strong>Ficou com alguma dúvida antes de pagar?</strong>Fale com nosso suporte no WhatsApp — respondemos rápido.</span>
+      </a>
+
+      <div class="pix-dados">
+        <div class="pix-dados-label">Dados do seu EdocBR</div>
+        <div class="pix-dados-row"><span>Referência</span><span id="ref-pedido-pix">—</span></div>
+        <div class="pix-dados-row nome"><span>Solicitante</span><span id="ref-nome-pix">—</span></div>
+        <div class="pix-dados-row nome" id="pix-merchant-name" style="display:none;"><span>Intermediado por</span><span id="pix-merchant-name-text"></span></div>
+        <div class="pix-dados-ok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>
+          Liberação imediata após confirmação do pagamento
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCESSO -->
+    <div class="success-panel" id="panel-success">
+      <div class="success-icon">
+        <svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M26 5.25h-2c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h1.25v22.5h-18.5v-22.5h1.25c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0h-2c-0.414 0-0.75 0.336-0.75 0.75v0 24c0 0.414 0.336 0.75 0.75 0.75h20c0.414-0 0.75-0.336 0.75-0.75v0-24c-0-0.414-0.336-0.75-0.75-0.75v0zM11 8.749h10c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0h-2.019c0.477-0.616 0.766-1.398 0.769-2.248v-0.001c0-2.071-1.679-3.75-3.75-3.75s-3.75 1.679-3.75 3.75v0c0.003 0.851 0.292 1.633 0.775 2.258l-0.006-0.009h-2.019c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0zM13.75 5c0-0 0-0.001 0-0.001 0-1.243 1.007-2.25 2.25-2.25s2.25 1.007 2.25 2.25c0 1.243-1.007 2.25-2.25 2.25v0c-1.242-0.002-2.248-1.008-2.25-2.249v-0zM20.326 13.494l-6.792 7.424-1.886-1.873c-0.136-0.136-0.323-0.22-0.531-0.22-0.414 0-0.749 0.335-0.749 0.749 0 0.209 0.085 0.398 0.223 0.534l0 0 2.44 2.424 0.015 0.006 0.007 0.015c0.13 0.122 0.306 0.197 0.499 0.197 0.199 0 0.38-0.080 0.512-0.21l-0 0 0.027-0.011 0.005-0.011 0.017-0.012 7.317-8c0.122-0.133 0.197-0.311 0.197-0.506 0-0.414-0.335-0.749-0.749-0.749-0.219 0-0.415 0.094-0.552 0.243l-0 0.001z"/></svg>
+      </div>
+      <h2>Taxa confirmada!</h2>
+      <p>Seu guia está pronto. Clique abaixo para abrir.</p>
+      <a id="btn-abrir-guia" href="#" target="_blank" rel="noopener" class="btn-open-guide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Abrir meu guia digital
+      </a>
+      <p style="margin-top:14px;font-size:12px;color:var(--text-faint);">Link enviado também para seu e-mail.</p>
+    </div>
+  </div>
+</main>
+
+<div class="cta-bar" id="cta-bar">
+  <button class="btn-cta" id="cta-btn" onclick="handleCTA()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    Verificar Dados
+  </button>
+  <div class="secure-note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Dados protegidos e criptografados
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2026 EdocBr. Todos os direitos reservados.</p>
+  <p class="footer-disclaimer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Não somos um site governamental. Empresa privada de assessoria.
+  </p>
+</footer>
+
+<script>
+var API_PROXY_URL = '/api';
+var LS_KEY = 'edoc_digitaliza_sessao';
+
+var SUPORTE_WHATSAPP = '';
+
+var GUIA_MAP = {
+  'TIRAR':             { visual: 'RESERVISTA', via: 1, blog: false },
+  'REGULARIZAR':       { visual: 'RESERVISTA', via: 2, blog: false },
+  'TIRAR_BLOG':        { visual: 'RESERVISTA', via: 1, blog: true  },
+  'REGULARIZAR_BLOG':  { visual: 'RESERVISTA', via: 2, blog: true  },
+  'RESERVISTA_1':      { visual: 'RESERVISTA', via: 1, blog: false },
+  'RESERVISTA_2':      { visual: 'RESERVISTA', via: 2, blog: false },
+  'DISPENSA_1':        { visual: 'DISPENSA',   via: 1, blog: false },
+  'DISPENSA_2':        { visual: 'DISPENSA',   via: 2, blog: false },
+  'RESERVISTA_1_BLOG': { visual: 'RESERVISTA', via: 1, blog: true  },
+  'RESERVISTA_2_BLOG': { visual: 'RESERVISTA', via: 2, blog: true  },
+  'DISPENSA_1_BLOG':   { visual: 'DISPENSA',   via: 1, blog: true  },
+  'DISPENSA_2_BLOG':   { visual: 'DISPENSA',   via: 2, blog: true  },
+  'ALISTAMENTO_BLOG':  { visual: 'ALISTAMENTO', via: 1, blog: true  },
+};
+
+var VISUAL = {
+  RESERVISTA: {
+    header: 'Certificado de Reservista',
+    via1: { tipoLabel: '1\u00aa Via \u2014 Certificado de Reservista', backendBase: 'TIRAR' },
+    via2: { tipoLabel: '2\u00aa Via \u2014 Certificado de Reservista', backendBase: 'REGULARIZAR' }
+  },
+  DISPENSA: {
+    header: 'Certificado de Dispensa (CDI)',
+    via1: { tipoLabel: '1\u00aa Via \u2014 Certificado de Dispensa', backendBase: 'TIRAR' },
+    via2: { tipoLabel: '2\u00aa Via \u2014 Certificado de Dispensa', backendBase: 'REGULARIZAR' }
+  },
+  ALISTAMENTO: {
+    header: 'Alistamento Militar',
+    via1: { tipoLabel: 'Alistamento Militar Online', backendBase: 'TIRAR' },
+    via2: { tipoLabel: 'Alistamento Militar Online', backendBase: 'TIRAR' }
+  }
+};
+
+var params     = new URLSearchParams(window.location.search);
+var guiaRaw    = (params.get('guia') || '').toUpperCase();
+var isBlogPage = window.location.pathname.toLowerCase().indexOf('blog') !== -1;
+if (!guiaRaw) guiaRaw = isBlogPage ? 'TIRAR_BLOG' : 'TIRAR';
+
+var ctx = GUIA_MAP[guiaRaw]
+  ? { visual: GUIA_MAP[guiaRaw].visual, via: GUIA_MAP[guiaRaw].via, blog: GUIA_MAP[guiaRaw].blog }
+  : { visual: 'RESERVISTA', via: 1, blog: isBlogPage };
+if (isBlogPage && !ctx.blog) ctx.blog = true;
+
+function buildProduct(visual, via, blog) {
+  var v       = VISUAL[visual];
+  var vc      = via === 1 ? v.via1 : v.via2;
+  var price   = blog ? 'R$ 39,91' : 'R$ 39,81';
+  var amount  = blog ? 3991 : 3981;
+  var backend = vc.backendBase + (blog ? '_BLOG' : '');
+  return { title: v.header, tipoLabel: vc.tipoLabel, price: price, amount: amount, backendGuia: backend };
+}
+
+var product = buildProduct(ctx.visual, ctx.via, ctx.blog);
+
+/* === Leitor genérico de campos do PIX Copia-e-Cola (padrão EMV / BR Code) ===
+   Lê qualquer campo TLV de nível raiz pelo ID:
+     '54' = valor da transação | '59' = nome do recebedor (merchant) */
+function lerCampoPix(code, alvoId) {
+  try {
+    var i = 0;
+    while (i < code.length - 4) {
+      var id  = code.substring(i, i + 2);
+      var len = parseInt(code.substring(i + 2, i + 4), 10);
+      if (isNaN(len) || len < 0) break;
+      var value = code.substring(i + 4, i + 4 + len);
+      if (id === alvoId) return value;
+      i += 4 + len;
+    }
+  } catch(e) {}
+  return null;
+}
+
+/* Lê o VALOR REAL embutido no código PIX (campo 54) e formata em R$.
+   Garante que a tela mostre exatamente o que o banco vai cobrar.
+   Se o PIX for QR dinâmico sem valor embutido, retorna null (usa-se o preço configurado). */
+function valorRealDoPix(code) {
+  var v = lerCampoPix(code, '54');
+  if (!v) return null;
+  var n = parseFloat(v);
+  if (isNaN(n)) return null;
+  return 'R$ ' + n.toFixed(2).replace('.', ',');
+}
+
+function parsePixMerchantName(code) {
+  return lerCampoPix(code, '59');
+}
+
+function exibirNomeMerchant(code) {
+  var nome = parsePixMerchantName(code);
+  if (nome) {
+    var el = document.getElementById('pix-merchant-name-text');
+    var wrap = document.getElementById('pix-merchant-name');
+    if (el) el.textContent = nome;
+    if (wrap) wrap.style.display = 'flex';
+  }
+}
+
+var currentStep       = 1;
+var saleId            = null;
+var pollInterval      = null;
+var timerInterval     = null;
+var pixCode           = '';
+var errosConsecutivos = 0;
+
+var STATUS_PAGO   = ['PAGO','PAID','APPROVED','APROVADO','CONCLUIDO','CONCLU\u00cdDO','COMPLETED','ACTIVE','CONFIRMED'];
+var STATUS_FALHOU = ['CANCELADO','CANCELLED','RECUSADO','FALHA','ESTORNADO','CHARGEBACK','MED','EXPIRED','FAILED'];
+
+function gerarRef() {
+  var d = new Date(), rnd = Math.floor(Math.random()*9000)+1000;
+  return 'TAX-' + d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0') + '-' + rnd;
+}
+var taxaRef = gerarRef();
+
+function salvarSessao(sid, code, amount, nome, ts) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ saleId: sid, pixCode: code, amount: amount, nome: nome || '', timestamp: ts || Date.now() })); } catch(e) {}
+}
+function limparSessao() { try { localStorage.removeItem(LS_KEY); } catch(e) {} }
+function restaurarSessao() {
+  try {
+    var raw = localStorage.getItem(LS_KEY);
+    if (!raw) return null;
+    var s = JSON.parse(raw);
+    if (!s.saleId || !s.pixCode) return null;
+    if (Date.now() - s.timestamp > 30 * 60 * 1000) { limparSessao(); return null; }
+    return s;
+  } catch(e) { return null; }
+}
+
+/* Configura o link do WhatsApp de suporte (se houver número) */
+function configurarSuporte() {
+  if (!SUPORTE_WHATSAPP) return;
+  var sp = document.getElementById('pix-support');
+  if (!sp) return;
+  var msg = 'Ol\u00e1! Preciso de ajuda com minha solicita\u00e7\u00e3o ' + taxaRef + '.';
+  sp.href = 'https://wa.me/' + SUPORTE_WHATSAPP + '?text=' + encodeURIComponent(msg);
+  sp.classList.add('show');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var preCard = document.querySelector('.tipo-card[data-via="' + ctx.via + '"]');
+  if (preCard) preCard.classList.add('selected');
+
+  document.getElementById('header-tipo').textContent = product.title;
+  document.getElementById('taxa-valor').textContent  = product.price;
+
+  var sessao = restaurarSessao();
+  if (sessao) {
+    saleId  = sessao.saleId;
+    pixCode = sessao.pixCode;
+    document.getElementById('taxa-valor').textContent = sessao.amount;
+    mostrarPainelPix(sessao.amount, sessao.nome);
+    var elapsed   = Math.floor((Date.now() - sessao.timestamp) / 1000);
+    var remaining = Math.max(0, 30 * 60 - elapsed);
+    if (remaining > 0) {
+      startTimer(remaining);
+      startPolling();
+      if (sessao.pixCode) exibirNomeMerchant(sessao.pixCode);
+    } else {
+      limparSessao();
+      document.getElementById('pix-status').innerHTML = 'PIX expirado. <a href="javascript:location.reload()" style="color:var(--primary);font-weight:500">Gerar novo PIX</a>';
+    }
+  }
+});
+
+function mostrarPainelPix(priceOverride, nomeOverride) {
+  document.getElementById('main-navbar').style.display  = 'none';
+  document.getElementById('main-stepper').style.display = 'none';
+  var ch = document.querySelector('.card-header'); if (ch) ch.style.display = 'none';
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('panel-4').classList.add('active');
+  currentStep = 4;
+
+  /* Valor exibido = valor REAL do código PIX quando disponível (à prova de divergência) */
+  var precoReal = (pixCode && valorRealDoPix(pixCode)) || priceOverride || product.price;
+
+  var haEl = document.getElementById('pix-header-amount');
+  if (haEl) haEl.textContent = precoReal;
+
+  var codePreview = document.getElementById('pix-code-preview');
+  if (codePreview && pixCode) codePreview.textContent = pixCode;
+
+  var refEl  = document.getElementById('ref-pedido-pix');
+  var nomeEl = document.getElementById('ref-nome-pix');
+  if (refEl) refEl.textContent = taxaRef;
+  if (nomeEl) {
+    var nomeInput = nomeOverride || document.getElementById('name').value.trim().toUpperCase();
+    nomeEl.textContent = nomeInput;
+  }
+
+  /* Reassegurança de 2ª via — só aparece para quem está tirando a 2ª via */
+  if (ctx.via === 2) {
+    var r = document.getElementById('via2-reassure');
+    if (r) r.classList.add('show');
+  }
+
+  /* Suporte WhatsApp (se configurado) */
+  configurarSuporte();
+
+  document.getElementById('cta-bar').classList.add('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectTipo(el) {
+  document.querySelectorAll('.tipo-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+  ctx.via = parseInt(el.getAttribute('data-via')) || 1;
+  product = buildProduct(ctx.visual, ctx.via, ctx.blog);
+  document.getElementById('header-tipo').textContent = product.title;
+  document.getElementById('taxa-valor').textContent  = product.price;
+}
+
+function updateDots(step) {
+  for (var i = 1; i <= 3; i++) {
+    var d = document.getElementById('dot-' + i); if (!d) continue;
+    d.className = 's-dot';
+    if (i < step) d.classList.add('done'); else if (i === step) d.classList.add('active');
+  }
+}
+
+function goToStep(n) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  var panel = document.getElementById('panel-' + n); if (panel) panel.classList.add('active');
+  currentStep = n; updateDots(n); updateCTA(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateCTA(step) {
+  var bar = document.getElementById('cta-bar');
+  var btn = document.getElementById('cta-btn');
+  if (!btn) return;
+  if (step === 4 || step === 'success') { bar.classList.add('hidden'); return; }
+  bar.classList.remove('hidden');
+  btn.className = 'btn-cta'; btn.innerHTML = '';
+  if (step === 1) {
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Verificar Dados';
+    var sn = document.querySelector('.secure-note'); if (sn) sn.style.display = 'flex';
+    var bb = document.querySelector('.btn-back'); if (bb) bb.remove();
+  } else if (step === 2) {
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><polyline points="9 18 15 12 9 6"/></svg> Confirmar e Ver Taxa';
+    var sn2 = document.querySelector('.secure-note'); if (sn2) sn2.style.display = 'none';
+    if (!document.querySelector('.btn-back')) { var back = document.createElement('button'); back.className='btn-back'; back.textContent='\u2190 Corrigir dados'; back.onclick=function(){ goToStep(1); }; bar.appendChild(back); }
+  } else if (step === 3) {
+    btn.className = 'btn-cta green';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Gerar C\u00f3digo de Taxa PIX';
+    var sn3 = document.querySelector('.secure-note'); if (sn3) sn3.style.display = 'none';
+    var bb3 = document.querySelector('.btn-back');
+    if (!bb3) { var back3 = document.createElement('button'); back3.className='btn-back'; back3.textContent='\u2190 Voltar'; back3.onclick=function(){ goToStep(2); }; bar.appendChild(back3); }
+    else { bb3.textContent='\u2190 Voltar'; bb3.onclick=function(){ goToStep(2); }; }
+  }
+}
+
+function handleCTA() {
+  if      (currentStep === 1) step1();
+  else if (currentStep === 2) step2();
+  else if (currentStep === 3) step3();
+}
+
+document.getElementById('phone').addEventListener('input', function(e) {
+  var v=e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>6) v='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
+  else if(v.length>2) v='('+v.slice(0,2)+') '+v.slice(2);
+  e.target.value=v;
+});
+document.getElementById('cpf').addEventListener('input', function(e) {
+  var v=e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>9) v=v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6,9)+'-'+v.slice(9);
+  else if(v.length>6) v=v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6);
+  else if(v.length>3) v=v.slice(0,3)+'.'+v.slice(3);
+  e.target.value=v;
+});
+
+function clearErrors() { document.querySelectorAll('.fg').forEach(function(f){f.classList.remove('error');}); }
+function setError(id) { document.getElementById(id).classList.add('error'); }
+
+/* Valida celular BR na origem: exatamente 11 dígitos, DDD válido (11-99),
+   e 9 na 3ª posição (celular). Impede número incompleto/errado de virar SMS morto. */
+function celularValido(raw) {
+  var d = String(raw || '').replace(/\D/g, '');
+  if (d.length !== 11) return false;              // tem que ter DDD + 9 dígitos
+  var ddd = parseInt(d.slice(0, 2), 10);
+  if (ddd < 11 || ddd > 99) return false;         // DDD fora da faixa
+  if (d.charAt(2) !== '9') return false;          // celular tem 9 após o DDD
+  return true;
+}
+
+function step1() {
+  clearErrors(); var ok = true;
+  if (document.getElementById('cpf').value.replace(/\D/g,'').length !== 11) { setError('fg-cpf'); ok = false; }
+  if (document.getElementById('name').value.trim().length < 3) { setError('fg-name'); ok = false; }
+  if (!document.querySelector('.tipo-card.selected')) { alert('Selecione 1\u00aa Via ou 2\u00aa Via'); ok = false; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim())) { setError('fg-email'); ok = false; }
+  if (!celularValido(document.getElementById('phone').value)) { setError('fg-phone'); ok = false; }
+  if (!ok) return;
+  document.getElementById('confirm-name').textContent     = document.getElementById('name').value.trim().toUpperCase();
+  document.getElementById('confirm-cpf').textContent      = document.getElementById('cpf').value.trim();
+  document.getElementById('confirm-email').textContent    = document.getElementById('email').value.trim();
+  document.getElementById('confirm-phone').textContent    = document.getElementById('phone').value.trim();
+  document.getElementById('confirm-tipo-text').textContent = product.tipoLabel;
+  goToStep(2);
+}
+
+function step2() {
+  document.getElementById('taxa-nome').textContent  = document.getElementById('name').value.trim().toUpperCase();
+  document.getElementById('taxa-cpf').textContent   = document.getElementById('cpf').value.trim();
+  document.getElementById('taxa-doc').textContent   = product.tipoLabel;
+  document.getElementById('taxa-ref').textContent   = taxaRef;
+  document.getElementById('taxa-valor').textContent = product.price;
+  goToStep(3);
+}
+
+async function step3() {
+  var btn = document.getElementById('cta-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner" style="border-top-color:#fff;border-color:rgba(255,255,255,.3)"></span> Gerando taxa...';
+  try {
+    var response = await fetch(API_PROXY_URL + '/create-pix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        guia: product.backendGuia,
+        customer: {
+          name:  document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.replace(/\D/g,''),
+          cpf:   document.getElementById('cpf').value.replace(/\D/g,''),
+        },
+        utm: {
+          utmSource:   params.get('utm_source')   || '',
+          utmMedium:   params.get('utm_medium')   || '',
+          utmCampaign: params.get('utm_campaign') || '',
+          src:         params.get('src')          || '',
+          sck:         params.get('sck')          || ''
+        }
+      })
+    });
+    var data = await response.json();
+    if (!response.ok || !data.pix) throw new Error(data.message || 'Erro ao gerar taxa');
+    saleId  = data.saleId;
+    pixCode = data.pix.key || '';
+    salvarSessao(saleId, pixCode, product.price, document.getElementById('name').value.trim().toUpperCase(), Date.now());
+    if (data.pix.qrCodeBase64) document.getElementById('pix-qr').innerHTML = '<img src="' + data.pix.qrCodeBase64 + '" alt="QR">';
+    if (pixCode) exibirNomeMerchant(pixCode);
+    mostrarPainelPix(product.price, document.getElementById('name').value.trim().toUpperCase());
+    startTimer(30 * 60);
+    startPolling();
+  } catch(err) {
+    btn.disabled = false;
+    btn.className = 'btn-cta green';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Gerar C\u00f3digo de Taxa PIX';
+    alert('Erro: ' + err.message + '. Tente novamente.');
+  }
+}
+
+document.getElementById('btn-copy-pix').addEventListener('click', function() {
+  if (!pixCode) return;
+  var btn = this;
+  if (navigator.clipboard) navigator.clipboard.writeText(pixCode);
+  else { var ta=document.createElement('textarea');ta.value=pixCode;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta); }
+  btn.classList.add('copied');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg> Copiado!';
+  setTimeout(function() {
+    btn.classList.remove('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar código';
+  }, 2500);
+});
+
+document.getElementById('btn-verify').addEventListener('click', async function() {
+  if (!saleId) return;
+  var btn = this; btn.disabled = true;
+  btn.innerHTML = '<span class="spinner" style="border-top-color:#fff;border-color:rgba(255,255,255,.3)"></span> Verificando...';
+  try {
+    var data = await (await fetch(API_PROXY_URL + '/check-status/' + saleId)).json();
+    var st = (data.status || data.situacao || data.payment_status || '').toString().toUpperCase();
+    if (STATUS_PAGO.indexOf(st) !== -1) { handleSuccess(); return; }
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg> Já paguei — Verificar pagamento';
+    var el = document.getElementById('pix-status');
+    el.innerHTML = '<span style="color:#c0392b">Pagamento ainda não identificado. Aguarde alguns segundos e tente novamente.</span>';
+    setTimeout(function(){ el.innerHTML = '<span class="spinner"></span> Aguardando pagamento...'; }, 5000);
+  } catch(e) {
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg> Já paguei — Verificar pagamento';
+    document.getElementById('pix-status').innerHTML = '<span style="color:#c0392b">Erro de conexão. Tente clicar em "Já paguei" novamente.</span>';
+  }
+});
+
+function startPolling() {
+  if (!saleId) return;
+  errosConsecutivos = 0;
+  var tentativas = 0;
+  pollInterval = setInterval(async function() {
+    tentativas++;
+    if (tentativas >= 360) {
+      clearInterval(pollInterval); limparSessao();
+      document.getElementById('pix-status').innerHTML = 'Tempo expirado. <a href="javascript:location.reload()" style="color:var(--primary);font-weight:500">Gerar novo PIX</a>';
+      return;
+    }
+    try {
+      var data = await (await fetch(API_PROXY_URL + '/check-status/' + saleId)).json();
+      errosConsecutivos = 0;
+      var status = (data.status || data.situacao || data.payment_status || '').toString().toUpperCase();
+      if (STATUS_PAGO.indexOf(status) !== -1) { clearInterval(pollInterval); clearInterval(timerInterval); handleSuccess(); return; }
+      if (STATUS_FALHOU.indexOf(status) !== -1) {
+        clearInterval(pollInterval); limparSessao();
+        document.getElementById('pix-status').innerHTML = 'Pagamento não realizado. <a href="javascript:location.reload()" style="color:var(--primary);font-weight:500">Tentar novamente</a>';
+      }
+    } catch(e) {
+      errosConsecutivos++;
+      if (errosConsecutivos >= 5) document.getElementById('pix-status').innerHTML = '<span style="color:#c0392b">Conexão instável. Se já pagou, clique em "Já paguei" acima.</span>';
+    }
+  }, 5000);
+}
+
+function handleSuccess() {
+  limparSessao(); clearInterval(pollInterval); clearInterval(timerInterval);
+
+  // === Google Ads: conversao de compra (dispara 1x por venda paga) ===
+  // 2 contas rodam o mesmo site. As duas chamadas disparam, mas cada conta
+  // so credita a venda cujo gclid pertence a ela. Sem contagem dupla.
+  if (!window.__conversaoEnviada && typeof gtag === 'function') {
+    window.__conversaoEnviada = true;
+    var _val = (product.amount || 0) / 100;   // valor REAL em BRL
+    var _tid = saleId || taxaRef;             // dedup por venda
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18041159133/V6RdCPWlj7EcEN372JpD',
+      'value': _val, 'currency': 'BRL', 'transaction_id': _tid
+    });
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18039069245/ScJyCIX5zL0cEL202ZlD',
+      'value': _val, 'currency': 'BRL', 'transaction_id': _tid
+    });
+  }
+
+  document.getElementById('btn-abrir-guia').href = '/Tudo-Situacao-Militar.pdf';
+  document.querySelectorAll('.panel, .success-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('panel-success').classList.add('active');
+}
+
+function startTimer(seconds) {
+  var remaining = seconds;
+  timerInterval = setInterval(function() {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('pix-timer').textContent = '00:00';
+      document.getElementById('pix-expiry').style.cssText += ';background:#fee2e2;border-color:#f87171;color:#991b1b';
+      return;
+    }
+    var m = Math.floor(remaining/60), s = remaining%60;
+    document.getElementById('pix-timer').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }, 1000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /checkoutblog.html
+
+Sitemap: https://digitaliza-reserva.vercel.app/sitemap.xml

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia do Reservista — Certificado de Reservista e Dispensa Militar</title>
+<meta name="description" content="Tudo sobre Certificado de Reservista e Certificado de Dispensa: como tirar, regularizar, segunda via e situação militar. Informações completas e atualizadas.">
+<meta name="keywords" content="certificado de reservista, dispensa militar, como tirar reservista, segunda via reservista, situação militar irregular, alistamento militar, CDI, CAM">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://digitaliza-reserva.vercel.app/">
+<meta property="og:title" content="Guia do Reservista — Certificado de Reservista e Dispensa Militar">
+<meta property="og:description" content="Tudo sobre Certificado de Reservista e Certificado de Dispensa: como tirar, regularizar e segunda via.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1f1c;
+  --bg2:#112520;
+  --bg3:#162e29;
+  --accent:#2aad8f;
+  --accent2:#1d8a6f;
+  --text:#e8f0ee;
+  --text2:#a8c4be;
+  --text3:#6b9088;
+  --border:rgba(255,255,255,0.07);
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
+
+/* NAV */
+nav{background:rgba(13,31,28,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nav-brand{font-size:1.05rem;font-weight:800;color:var(--white);letter-spacing:-0.3px;text-decoration:none}
+.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+
+/* HERO */
+.hero{padding:80px 5% 72px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(42,173,143,0.12);border:1px solid rgba(42,173,143,0.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.4px;text-transform:uppercase;margin-bottom:20px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.hero h1{font-size:clamp(2rem,3.5vw,3rem);font-weight:900;color:var(--white);line-height:1.15;letter-spacing:-1px;margin-bottom:20px}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-desc{font-size:1rem;color:var(--text2);line-height:1.75;margin-bottom:32px;max-width:520px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.stat{text-align:left}
+.stat-num{font-size:1.6rem;font-weight:900;color:var(--white);letter-spacing:-1px;line-height:1}
+.stat-label{font-size:12px;color:var(--text3);margin-top:3px}
+.hero-visual{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.doc-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px}
+.doc-icon{width:40px;height:40px;border-radius:8px;background:rgba(42,173,143,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.doc-name{font-size:14px;font-weight:700;color:var(--white);margin-bottom:2px}
+.doc-desc{font-size:12px;color:var(--text3)}
+.doc-badge{margin-left:auto;background:rgba(42,173,143,0.15);border:1px solid rgba(42,173,143,0.25);border-radius:5px;padding:3px 9px;font-size:11px;font-weight:600;color:var(--accent);white-space:nowrap}
+
+/* SECTIONS */
+section{padding:64px 5%;border-top:1px solid var(--border)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.section-title{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:var(--white);letter-spacing:-0.5px;margin-bottom:12px;line-height:1.25}
+.section-sub{font-size:.95rem;color:var(--text2);max-width:580px;line-height:1.7}
+
+/* GRID CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:36px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px}
+.info-card-icon{font-size:26px;margin-bottom:14px}
+.info-card h3{font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px}
+.info-card p{font-size:13px;color:var(--text2);line-height:1.65}
+
+/* STEPS */
+.steps{margin-top:36px;display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--border)}
+.step-item:last-child{border-bottom:none}
+.step-num{width:36px;height:36px;border-radius:50%;background:rgba(42,173,143,0.12);border:1px solid rgba(42,173,143,0.25);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0;margin-top:2px}
+.step-content h4{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px}
+.step-content p{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* FAQ */
+.faq{margin-top:36px;display:flex;flex-direction:column;gap:2px}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.faq-q{padding:16px 20px;font-size:14px;font-weight:600;color:var(--white);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;list-style:none;user-select:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'+';font-size:18px;font-weight:300;color:var(--accent);flex-shrink:0;transition:transform .2s}
+details[open] .faq-q::after{transform:rotate(45deg)}
+.faq-a{padding:0 20px 16px;font-size:13px;color:var(--text2);line-height:1.7}
+
+/* TABLE */
+.info-table{width:100%;border-collapse:collapse;margin-top:28px;font-size:13px}
+.info-table th{text-align:left;padding:10px 14px;background:var(--bg2);color:var(--text3);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.info-table td{padding:12px 14px;color:var(--text2);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.info-table tr:last-child td{border-bottom:none}
+.info-table td:first-child{color:var(--white);font-weight:600}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 5%;text-align:center}
+.footer-inner{max-width:900px;margin:0 auto}
+footer p{font-size:12px;color:var(--text3);line-height:1.7}
+footer a{color:var(--text3);text-decoration:underline}
+footer p+p{margin-top:6px}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:48px 5% 48px}
+  .hero-visual{display:none}
+  nav{padding:0 4%}
+  .nav-links{display:none}
+  section{padding:44px 4%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Digitaliza<span>Reserva</span></a>
+  <ul class="nav-links">
+    <li><a href="#documentos">Documentos</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li>
+    <li><a href="#duvidas">Dúvidas</a></li>
+  </ul>
+</nav>
+
+<div style="max-width:1100px;margin:0 auto">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Informações Militares</div>
+      <h1>Tudo sobre seu<br><em>Certificado Militar</em></h1>
+      <p class="hero-desc">Guia completo sobre Certificado de Reservista, CDI, CAM e regularização de situação militar. Informações claras para resolver sua documentação.</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Tipos de certificado</div></div>
+        <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Prazo médio de emissão</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Digital e seguro</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="doc-card">
+        <div class="doc-icon">🎖️</div>
+        <div>
+          <div class="doc-name">Certificado de Reservista</div>
+          <div class="doc-desc">1ª Via e 2ª Via disponíveis</div>
+        </div>
+        <div class="doc-badge">Ativo</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <div>
+          <div class="doc-name">Certificado de Dispensa (CDI)</div>
+          <div class="doc-desc">Incorporação e regularização</div>
+        </div>
+        <div class="doc-badge">Ativo</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">✅</div>
+        <div>
+          <div class="doc-name">CAM — Certificado de Alistamento</div>
+          <div class="doc-desc">Comprovante de alistamento</div>
+        </div>
+        <div class="doc-badge">Ativo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="documentos">
+  <div class="section-inner">
+    <div class="section-label">Documentação Militar</div>
+    <h2 class="section-title">Quais são os Certificados Militares?</h2>
+    <p class="section-sub">Existem diferentes tipos de documentos militares, cada um para uma situação específica. Entenda qual você precisa.</p>
+    <div class="cards-grid">
+      <div class="info-card">
+        <div class="info-card-icon">🎖️</div>
+        <h3>Certificado de Reservista</h3>
+        <p>Documento entregue após o cumprimento do serviço militar obrigatório. Comprova que o cidadão cumpriu suas obrigações militares. Exigido em concursos públicos, empregos e viagens internacionais.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📋</div>
+        <h3>CDI — Certificado de Dispensa de Incorporação</h3>
+        <p>Documento entregue a quem foi dispensado do serviço militar. Tem a mesma validade legal do Certificado de Reservista para fins de comprovação de quitação com as obrigações militares.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📄</div>
+        <h3>CAM — Certificado de Alistamento Militar</h3>
+        <p>Comprovante de que o cidadão realizou seu alistamento. Necessário para quem completou 18 anos e ainda não foi incorporado ou dispensado. Emitido pela Junta Militar.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🔄</div>
+        <h3>CI — Certificado de Isenção</h3>
+        <p>Documento para cidadãos que foram isentos do serviço militar por motivo de saúde ou outra condição prevista em lei. Comprova a situação regular perante o Exército Brasileiro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="section-inner">
+    <div class="section-label">Processo</div>
+    <h2 class="section-title">Como tirar o Certificado de Reservista?</h2>
+    <p class="section-sub">O processo pode ser feito presencialmente na Junta Militar mais próxima ou, em alguns casos, pelo portal do Exército Brasileiro.</p>
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Localize a Junta Militar ou Tiro de Guerra mais próximo</h4>
+          <p>Acesse o site do Exército Brasileiro (eb.mil.br) e localize a unidade responsável pela sua região. Leve os documentos necessários: RG, CPF, título de eleitor e comprovante de residência.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Apresente a documentação e solicite o certificado</h4>
+          <p>Na Junta, apresente seus documentos e informe que deseja solicitar o Certificado de Reservista (1ª via) ou a 2ª via caso já tenha sido emitido anteriormente.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Pague a taxa de emissão</h4>
+          <p>Há uma taxa administrativa para emissão do documento. O valor varia conforme o tipo de certificado e pode ser pago por PIX, boleto ou na própria Junta.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Aguarde o processamento</h4>
+          <p>O prazo médio de emissão é de 24 a 72 horas úteis. Em alguns casos pode ser entregue no mesmo dia. O certificado pode ser enviado digitalmente ou retirado presencialmente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">Comparativo</div>
+    <h2 class="section-title">Diferenças entre os Certificados</h2>
+    <p class="section-sub">Entenda as principais diferenças entre os documentos militares para saber qual você precisa solicitar.</p>
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Documento</th>
+          <th>Para quem é</th>
+          <th>Quando é emitido</th>
+          <th>Validade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Certificado de Reservista</td>
+          <td>Quem serviu o Exército</td>
+          <td>Após término do serviço militar</td>
+          <td>Vitalícia</td>
+        </tr>
+        <tr>
+          <td>CDI (Dispensa)</td>
+          <td>Quem foi dispensado</td>
+          <td>Após dispensa na seleção</td>
+          <td>Vitalícia</td>
+        </tr>
+        <tr>
+          <td>CAM</td>
+          <td>Quem se alistou</td>
+          <td>No momento do alistamento</td>
+          <td>Até incorporação ou dispensa</td>
+        </tr>
+        <tr>
+          <td>CI (Isenção)</td>
+          <td>Isentos por lei</td>
+          <td>Após reconhecimento da isenção</td>
+          <td>Vitalícia</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="duvidas">
+  <div class="section-inner">
+    <div class="section-label">Dúvidas Frequentes</div>
+    <h2 class="section-title">Perguntas sobre documentação militar</h2>
+    <p class="section-sub">Respondemos as dúvidas mais comuns sobre Certificado de Reservista, CDI e situação militar.</p>
+    <div class="faq">
+      <details class="faq-item">
+        <summary class="faq-q">O Certificado de Reservista é obrigatório?</summary>
+        <p class="faq-a">Sim. Todo cidadão brasileiro do sexo masculino é obrigado a regularizar sua situação militar após os 18 anos. O certificado comprova essa regularização e é exigido em concursos públicos, empréstimos bancários, passaporte e matrícula em faculdade pública.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Qual a diferença entre 1ª via e 2ª via do Reservista?</summary>
+        <p class="faq-a">A 1ª via é emitida pela primeira vez após o cumprimento das obrigações militares. A 2ª via é solicitada quando o documento original foi perdido, danificado ou roubado. O processo de solicitação é similar, mas a 2ª via pode ter uma taxa diferente.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Perdi meu Certificado de Reservista. O que fazer?</summary>
+        <p class="faq-a">Você deve solicitar a 2ª via na Junta Militar ou Tiro de Guerra da sua cidade. Em alguns estados é possível fazer o pedido pelo portal do Exército. É necessário apresentar RG, CPF e boletim de ocorrência (recomendável, mas nem sempre obrigatório).</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">CDI tem a mesma validade que o Reservista?</summary>
+        <p class="faq-a">Sim. O Certificado de Dispensa de Incorporação (CDI) tem a mesma validade legal que o Certificado de Reservista para fins de comprovação de quitação com as obrigações militares. Ambos provam que o cidadão está em situação regular.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Como saber se estou com a situação militar irregular?</summary>
+        <p class="faq-a">Você pode verificar sua situação pelo site do Exército Brasileiro (alistamento.eb.mil.br) ou diretamente na Junta Militar mais próxima. Se não tiver realizado o alistamento ou não possuir nenhum dos certificados militares, provavelmente está irregular.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Qual o prazo para regularizar a situação militar?</summary>
+        <p class="faq-a">O alistamento deve ser feito no ano em que o cidadão completa 18 anos. Após os 45 anos de idade, as penalidades pela irregularidade são suspensas automaticamente. Entre 18 e 45 anos, é possível regularizar a qualquer momento mediante pagamento de multa.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p>© 2026 DigitalizaReserva. Todos os direitos reservados.</p>
+    <p>Serviço privado de assessoria e informação. Não somos um órgão governamental ou representante do Exército Brasileiro.</p>
+    <p style="margin-top:10px"><a href="/termos-uso.html">Termos de Uso</a> &nbsp;·&nbsp; <a href="/privacidade-termo.html">Política de Privacidade</a></p>
+    <p style="margin-top:10px">Desenvolvido por Rafael Monteiro Braga</p>
+  </div>
+</footer>
+
+</body>
+</html>
