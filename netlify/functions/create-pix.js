@@ -12,10 +12,10 @@ function normalizeGuia(raw) {
 }
 
 const products = {
-  TIRAR:            { title: 'Digital Guia Informa', amount: 3981 },
-  REGULARIZAR:      { title: 'Digital Guia Informa', amount: 3981 },
-  TIRAR_BLOG:       { title: 'Digital Guia Informa', amount: 3991 },
-  REGULARIZAR_BLOG: { title: 'Digital Guia Informa', amount: 3991 },
+  TIRAR:            { title: 'Produto Digital', amount: 3981 },
+  REGULARIZAR:      { title: 'Produto Digital', amount: 3981 },
+  TIRAR_BLOG:       { title: 'Produto Digital', amount: 3991 },
+  REGULARIZAR_BLOG: { title: 'Produto Digital', amount: 3991 },
 };
 
 function formatBRL(cents) {
