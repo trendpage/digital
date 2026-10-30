@@ -12,10 +12,10 @@ function normalizeGuia(raw) {
 }
 
 const products = {
-  TIRAR:            { title: 'Produto Digital', amount: 3981 },
-  REGULARIZAR:      { title: 'Produto Digital', amount: 3981 },
-  TIRAR_BLOG:       { title: 'Produto Digital', amount: 3991 },
-  REGULARIZAR_BLOG: { title: 'Produto Digital', amount: 3991 },
+  TIRAR:            { title: 'Produto Digital', amount: 3982 },
+  REGULARIZAR:      { title: 'Produto Digital', amount: 3982 },
+  TIRAR_BLOG:       { title: 'Produto Digital', amount: 3992 },
+  REGULARIZAR_BLOG: { title: 'Produto Digital', amount: 3992 },
 };
 
 function formatBRL(cents) {
