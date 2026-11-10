@@ -14,8 +14,8 @@ function normalizeGuia(raw) {
 const products = {
   TIRAR:            { title: 'Produto Digital', amount: 3981 },
   REGULARIZAR:      { title: 'Produto Digital', amount: 3981 },
-  TIRAR_BLOG:       { title: 'Produto Digital', amount: 3991 },
-  REGULARIZAR_BLOG: { title: 'Produto Digital', amount: 3991 },
+  TIRAR_BLOG:       { title: 'Produto Digital', amount: 3993 },
+  REGULARIZAR_BLOG: { title: 'Produto Digital', amount: 3993 },
 };
 
 function formatBRL(cents) {
