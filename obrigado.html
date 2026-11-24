@@ -52,11 +52,26 @@
   var texto = document.getElementById('texto');
 
   var mensagens = {
-  satisfeito: { t: 'Que ótimo! Obrigado.', p: 'Ficamos muito feliz que o guia tenha atendido o que você esperava. Sua palavra significa muito.' },
-  insatisfeito: { t: 'Obrigado pela honestidade.', p: 'Sentimos não ter atendido sua expectativa. Se puder nos contar o que faltou, responda ao email helpfacilitadigital@gmail.com — vamos tentar resolver.' },
-  sim: { t: 'Que ótimo!', p: 'Ficamos muito felizes que o guia te ajudou a resolver. Obrigado por nos contar.' },
-  parte: { t: 'Obrigado por nos contar.', p: 'Se tiver dúvida em algum passo, responda ao email que nós te ajudamos.' },
-  nao: { t: 'Sinto muito.', p: 'Queremps entender o que deu errado pra ajudar você. Responda ao email contando o que aconteceu.' }
+  satisfeito: {
+    t: 'Obrigado pela sua resposta!',
+    p: 'Ficamos felizes que o guia atendeu o que você esperava. Sua palavra ajuda a melhorar o material.'
+  },
+  insatisfeito: {
+    t: 'Obrigado pela honestidade.',
+    p: 'Sentimos não ter atendido sua expectativa. Se puder contar o que faltou, responda ao email que você recebeu — vamos ler pessoalmente e tentar resolver.'
+  },
+  sim: {
+    t: 'Obrigado por nos contar!',
+    p: 'Ficamos felizes que o guia te ajudou a resolver.'
+  },
+  parte: {
+    t: 'Obrigado por nos contar.',
+    p: 'Se tiver dúvida em algum passo, responda ao email e vamos te ajudar.'
+  },
+  nao: {
+    t: 'Sentimos muito.',
+    p: 'Queremos entender o que deu errado. Responda ao email contando o que aconteceu e vamos tentar resolver.'
+  }
 };
 
   if (e && mensagens[e]) {
