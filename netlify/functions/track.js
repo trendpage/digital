@@ -2,7 +2,7 @@ const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL || '';
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || '';
 const SITE_URL = process.env.SITE_URL || '';
 
-const VALID_EVENTS = ['clara', 'duvida', 'sim', 'parte', 'nao'];
+const VALID_EVENTS = ['satisfeito', 'insatisfeito', 'sim', 'parte', 'nao'];
 
 exports.handler = async (event) => {
   const e = (event.queryStringParameters || {}).e || '';
