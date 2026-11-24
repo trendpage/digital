@@ -4,18 +4,21 @@ const MEDUSA_BASE = (process.env.MEDUSAPAY_BASE_URL || 'https://api.medusapayofi
 const MEDUSA_KEY = process.env.MEDUSAPAY_API_KEY || '';
 
 function normalizeGuia(raw) {
-  const g = (raw || 'TIRAR').toUpperCase();
-  const isBlog = g.indexOf('BLOG') !== -1;
-  const isRegularizar = g === 'REGULARIZAR' || g === 'REGULARIZAR_BLOG' || g.indexOf('_2') !== -1;
-  if (isRegularizar) return isBlog ? 'REGULARIZAR_BLOG' : 'REGULARIZAR';
-  return isBlog ? 'TIRAR_BLOG' : 'TIRAR';
+  const g = (raw || 'GUIA_A').toUpperCase();
+  if (g === 'GUIA_A' || g === 'GUIA_B' || g === 'GUIA_C' || g === 'GUIA_D') return g;
+  // Compatibilidade com links antigos ainda em cache do Google Ads
+  if (g === 'TIRAR') return 'GUIA_A';
+  if (g === 'REGULARIZAR') return 'GUIA_B';
+  if (g === 'TIRAR_BLOG') return 'GUIA_C';
+  if (g === 'REGULARIZAR_BLOG') return 'GUIA_D';
+  return 'GUIA_A';
 }
 
 const products = {
-  TIRAR:            { title: 'Produto Digital', amount: 3981 },
-  REGULARIZAR:      { title: 'Produto Digital', amount: 3981 },
-  TIRAR_BLOG:       { title: 'Produto Digital', amount: 3993 },
-  REGULARIZAR_BLOG: { title: 'Produto Digital', amount: 3993 },
+  GUIA_A: { title: 'Guia Digital', amount: 3981 },
+  GUIA_B: { title: 'Guia Digital', amount: 3981 },
+  GUIA_C: { title: 'Guia Digital', amount: 3991 },
+  GUIA_D: { title: 'Guia Digital', amount: 3991 },
 };
 
 function formatBRL(cents) {
@@ -33,10 +36,9 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers: corsHeaders, body: '' };
   }
 
-  // GET: devolve preço
   if (event.httpMethod === 'GET') {
     const g = normalizeGuia((event.queryStringParameters || {}).guia);
-    const prod = products[g] || products.TIRAR;
+    const prod = products[g] || products.GUIA_A;
     return {
       statusCode: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -57,7 +59,7 @@ exports.handler = async (event) => {
   const { guia, customer } = body;
 
   const normalizedGuia = normalizeGuia(guia);
-  const prod = products[normalizedGuia] || products.TIRAR;
+  const prod = products[normalizedGuia] || products.GUIA_A;
 
   const name = (customer?.name || '').trim();
   const email = (customer?.email || '').trim();
@@ -87,7 +89,7 @@ exports.handler = async (event) => {
   }
 
   const amountBRL = Number((prod.amount / 100).toFixed(2));
-  const produto = `${prod.title} | ${normalizedGuia}`.slice(0, 200);
+  const produto = prod.title.slice(0, 200);
   const idempotencyKey = crypto.randomUUID();
 
   const payload = {
