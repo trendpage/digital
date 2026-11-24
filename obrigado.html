@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obrigado</title>
+<style>
+  body {
+    font-family: -apple-system, system-ui, sans-serif;
+    background: #f0fdf4;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 48px 32px;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(2,125,108,.08);
+  }
+  .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    color: #065f46;
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">✓</div>
+  <h1 id="titulo">Obrigado pela sua resposta!</h1>
+  <p id="texto">Sua opinião é o que nos ajuda a melhorar o guia pros próximos clientes.</p>
+</div>
+<script>
+  var params = new URLSearchParams(window.location.search);
+  var e = params.get('e');
+  var titulo = document.getElementById('titulo');
+  var texto = document.getElementById('texto');
+
+  var mensagens = {
+    clara: { t: 'Obrigado!', p: 'Que bom que estava claro antes de comprar. Seu feedback nos ajuda a continuar sendo transparentes.' },
+    duvida: { t: 'Obrigado pela honestidade.', p: 'Vamos trabalhar pra deixar mais claro antes da compra. Se quiser nos contar o que gerou dúvida, responda ao email ou escreva pra helpfacilitadigital@gmail.com.' },
+    sim: { t: 'Que ótimo! 🎉', p: 'Ficamos muito felizes que o guia te ajudou a resolver. Obrigado por nos contar.' },
+    parte: { t: 'Obrigado por nos contar.', p: 'Se tiver dúvida em algum passo, responda ao email que eu te ajudo pessoalmente.' },
+    nao: { t: 'Sinto muito.', p: 'Queria entender o que deu errado pra ajudar você. Responda ao email contando o que aconteceu — vou pessoalmente tentar resolver.' }
+  };
+
+  if (e && mensagens[e]) {
+    titulo.textContent = mensagens[e].t;
+    texto.textContent = mensagens[e].p;
+  }
+</script>
+</body>
+</html>
