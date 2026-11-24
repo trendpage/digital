@@ -504,7 +504,12 @@ function buildProduct(visual, via, blog) {
   var vc      = via === 1 ? v.via1 : v.via2;
   var price   = blog ? 'R$ 39,91' : 'R$ 39,81';
   var amount  = blog ? 3991 : 3981;
-  var backend = vc.backendBase + (blog ? '_BLOG' : '');
+  var backend;
+if (blog) {
+  backend = (vc.backendBase === 'TIRAR') ? 'GUIA_C' : 'GUIA_D';
+} else {
+  backend = (vc.backendBase === 'TIRAR') ? 'GUIA_A' : 'GUIA_B';
+}
   return { title: v.header, tipoLabel: vc.tipoLabel, price: price, amount: amount, backendGuia: backend };
 }
 
