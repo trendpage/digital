@@ -6,7 +6,7 @@ const MEDUSA_KEY = process.env.MEDUSAPAY_API_KEY || '';
 function normalizeGuia(raw) {
   const g = (raw || 'GUIA_A').toUpperCase();
   if (g === 'GUIA_A' || g === 'GUIA_B' || g === 'GUIA_C' || g === 'GUIA_D') return g;
-  // Compatibilidade com links antigos ainda em cache do Google Ads
+  // Compatibilidade com links antigos
   if (g === 'TIRAR') return 'GUIA_A';
   if (g === 'REGULARIZAR') return 'GUIA_B';
   if (g === 'TIRAR_BLOG') return 'GUIA_C';
