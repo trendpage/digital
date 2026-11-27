@@ -17,8 +17,8 @@ function normalizeGuia(raw) {
 const products = {
   GUIA_A: { title: 'Guia Digital', amount: 3981 },
   GUIA_B: { title: 'Guia Digital', amount: 3981 },
-  GUIA_C: { title: 'Guia Digital', amount: 3991 },
-  GUIA_D: { title: 'Guia Digital', amount: 3991 },
+  GUIA_C: { title: 'Guia Digital', amount: 3992 },
+  GUIA_D: { title: 'Guia Digital', amount: 3992 },
 };
 
 function formatBRL(cents) {
